@@ -1,4 +1,4 @@
-package com.relatos_papel.gateway_filters.model;
+package com.proyecto.gateway_filters.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

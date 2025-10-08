@@ -1,4 +1,4 @@
-package com.relatos_papel.gateway_filters;
+package com.proyecto.gateway_filters;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

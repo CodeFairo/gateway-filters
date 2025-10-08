@@ -1,4 +1,4 @@
-package com.relatos_papel.gateway_filters.config;
+package com.proyecto.gateway_filters.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
