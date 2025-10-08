@@ -1,8 +1,8 @@
-package com.relatos_papel.gateway_filters.decorator;
+package com.proyecto.gateway_filters.decorator;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.relatos_papel.gateway_filters.model.GatewayRequest;
+import com.proyecto.gateway_filters.model.GatewayRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.relatos_papel.gateway_filters;
+package com.proyecto.gateway_filters;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

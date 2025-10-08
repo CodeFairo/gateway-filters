@@ -1,7 +1,7 @@
-package com.relatos_papel.gateway_filters.utils;
+package com.proyecto.gateway_filters.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.relatos_papel.gateway_filters.model.GatewayRequest;
+import com.proyecto.gateway_filters.model.GatewayRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.bouncycastle.util.Strings;

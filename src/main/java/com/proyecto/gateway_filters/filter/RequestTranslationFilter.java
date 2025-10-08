@@ -1,10 +1,8 @@
-package com.relatos_papel.gateway_filters.filter;
+package com.proyecto.gateway_filters.filter;
 
-import com.relatos_papel.gateway_filters.decorator.RequestDecoratorFactory;
-import com.relatos_papel.gateway_filters.model.GatewayRequest;
-import com.relatos_papel.gateway_filters.utils.RequestBodyExtractor;
-
-
+import com.proyecto.gateway_filters.decorator.RequestDecoratorFactory;
+import com.proyecto.gateway_filters.model.GatewayRequest;
+import com.proyecto.gateway_filters.utils.RequestBodyExtractor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

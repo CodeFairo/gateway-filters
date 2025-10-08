@@ -1,7 +1,7 @@
-package com.relatos_papel.gateway_filters.decorator;
+package com.proyecto.gateway_filters.decorator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.relatos_papel.gateway_filters.model.GatewayRequest;
+import com.proyecto.gateway_filters.model.GatewayRequest;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -18,17 +18,16 @@ import reactor.core.publisher.Flux;
 import java.net.URI;
 
 /**
- * This class is a decorator for the GatewayRequest object for POST requests.
+ * This class is a decorator for the GatewayRequest object for PUT requests.
  * It extends the ServerHttpRequestDecorator class and overrides its methods to modify the request.
  * It uses the ObjectMapper to convert the body of the GatewayRequest object into bytes.
  */
 @Slf4j
-public class PostRequestDecorator extends ServerHttpRequestDecorator {
-
+public class PutRequestDecorator extends ServerHttpRequestDecorator {
     private final GatewayRequest gatewayRequest;
     private final ObjectMapper objectMapper;
 
-    public PostRequestDecorator(GatewayRequest gatewayRequest, ObjectMapper objectMapper) {
+    public PutRequestDecorator(GatewayRequest gatewayRequest, ObjectMapper objectMapper) {
         super(gatewayRequest.getExchange().getRequest());
         this.gatewayRequest = gatewayRequest;
         this.objectMapper = objectMapper;
@@ -36,14 +35,14 @@ public class PostRequestDecorator extends ServerHttpRequestDecorator {
 
     /**
      * This method overrides the getMethod method of the ServerHttpRequestDecorator class.
-     * It returns the HTTP method of the request, which is POST.
+     * It returns the HTTP method of the request, which is PUT.
      *
      * @return the HTTP method of the request
      */
     @Override
     @NonNull
     public HttpMethod getMethod() {
-        return HttpMethod.POST;
+        return HttpMethod.PUT;
     }
 
     /**

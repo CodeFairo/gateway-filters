@@ -1,14 +1,10 @@
-package com.relatos_papel.gateway_filters.decorator;
+package com.proyecto.gateway_filters.decorator;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.relatos_papel.gateway_filters.model.GatewayRequest;
+import com.proyecto.gateway_filters.model.GatewayRequest;
 import lombok.NonNull;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.core.io.buffer.DataBufferFactory;
-import org.springframework.core.io.buffer.DefaultDataBufferFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
@@ -18,43 +14,44 @@ import reactor.core.publisher.Flux;
 import java.net.URI;
 
 /**
- * This class is a decorator for the GatewayRequest object for PUT requests.
+ * This class is a decorator for the GatewayRequest object for DELETE requests.
  * It extends the ServerHttpRequestDecorator class and overrides its methods to modify the request.
- * It uses the ObjectMapper to convert the body of the GatewayRequest object into bytes.
  */
 @Slf4j
-public class PutRequestDecorator extends ServerHttpRequestDecorator {
-    private final GatewayRequest gatewayRequest;
-    private final ObjectMapper objectMapper;
+public class DeleteRequestDecorator extends ServerHttpRequestDecorator {
 
-    public PutRequestDecorator(GatewayRequest gatewayRequest, ObjectMapper objectMapper) {
+    private final GatewayRequest gatewayRequest;
+
+    public DeleteRequestDecorator(GatewayRequest gatewayRequest) {
         super(gatewayRequest.getExchange().getRequest());
         this.gatewayRequest = gatewayRequest;
-        this.objectMapper = objectMapper;
     }
 
     /**
      * This method overrides the getMethod method of the ServerHttpRequestDecorator class.
-     * It returns the HTTP method of the request, which is PUT.
+     * It returns the HTTP method of the request, which is DELETE.
      *
      * @return the HTTP method of the request
      */
     @Override
     @NonNull
     public HttpMethod getMethod() {
-        return HttpMethod.PUT;
+        return HttpMethod.DELETE;
     }
 
     /**
      * This method overrides the getURI method of the ServerHttpRequestDecorator class.
-     * It returns the URI of the request.
+     * It returns the URI of the request, including any query parameters.
      *
      * @return the URI of the request
      */
     @Override
     @NonNull
     public URI getURI() {
-        return UriComponentsBuilder.fromUri((URI) gatewayRequest.getExchange().getAttributes().get(ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR)).build().toUri();
+        return UriComponentsBuilder
+                .fromUri((URI) gatewayRequest.getExchange().getAttributes().get(ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR))
+                .build()
+                .toUri();
     }
 
     /**
@@ -71,18 +68,14 @@ public class PutRequestDecorator extends ServerHttpRequestDecorator {
 
     /**
      * This method overrides the getBody method of the ServerHttpRequestDecorator class.
-     * It converts the body of the GatewayRequest object into bytes using the ObjectMapper, and returns it as a Flux of DataBuffers.
+     * Since DELETE requests do not have a body, it returns an empty Flux of DataBuffers.
      *
-     * @return a Flux of DataBuffers representing the body of the request
+     * @return an empty Flux of DataBuffers
      */
     @Override
     @NonNull
-    @SneakyThrows
     public Flux<DataBuffer> getBody() {
-        DataBufferFactory bufferFactory = new DefaultDataBufferFactory();
-        byte[] bodyData = objectMapper.writeValueAsBytes(gatewayRequest.getBody());
-        DataBuffer buffer = bufferFactory.allocateBuffer(bodyData.length);
-        buffer.write(bodyData);
-        return Flux.just(buffer);
+        return Flux.empty();
     }
+
 }
